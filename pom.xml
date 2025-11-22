@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Root parent of monorepo (not Spring Boot parent!) -->
+	<groupId>com.example</groupId>
+	<artifactId>city-residents-mono</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>city-residents-mono</name>
+	<description>Mono-repo for City Residents Service (city-residents + analytics)</description>
+
+	<!-- Java version -->
+	<properties>
+		<java.version>21</java.version>
+		<spring.boot.version>4.0.0</spring.boot.version>
+	</properties>
+
+	<!-- Multi-module listing -->
+	<modules>
+		<module>shared-library</module>
+		<module>city-residents-service</module>
+		<module>analytics-notifications-service</module>
+	</modules>
+
+	<!-- Spring Boot BOM -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- Plugins for submodules -->
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.11.0</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
