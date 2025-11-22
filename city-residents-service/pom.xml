@@ -8,5 +8,25 @@
     </parent>
     <artifactId>city-residents-service</artifactId>
     <name>Archetype - city-residents-service</name>
-    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <!-- web for REST endpoints -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- dependency on shared library -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shared-library</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -8,5 +8,25 @@
     </parent>
     <artifactId>analytics-notifications-service</artifactId>
     <name>Archetype - analytics-notifications-service</name>
-    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <!-- web for simple endpoints / metrics or health -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- dependency on shared library -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shared-library</artifactId>
+        </dependency>
+    </dependencies>
 </project>
