@@ -1,4 +1,25 @@
 package com.example.cityresidents.domain;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@Entity
 public class Passport {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Long id;
+
+    @Column(nullable = false, unique = true, length = 20)
+    private String passportNumber;
+
+    public Passport(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
 }
