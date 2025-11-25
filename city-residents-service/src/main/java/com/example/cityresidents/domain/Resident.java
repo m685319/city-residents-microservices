@@ -3,6 +3,9 @@ package com.example.cityresidents.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,7 +23,23 @@ public class Resident {
     @JoinColumn(name = "passport_id", nullable = false)
     private Passport passport;
 
+    @OneToMany(mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<Car> cars = new ArrayList<>();
+
     public Resident(Passport passport) {
         this.passport = passport;
+    }
+
+    public void addCar(Car car) {
+        cars.add(car);
+        car.setOwner(this);
+    }
+
+    public void removeCar(Car car) {
+        cars.remove(car);
+        car.setOwner(null);
     }
 }
