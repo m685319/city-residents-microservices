@@ -29,6 +29,14 @@ public class Resident {
             fetch = FetchType.LAZY)
     private List<Car> cars = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "resident_house",
+            joinColumns = @JoinColumn(name = "resident_id"),
+            inverseJoinColumns = @JoinColumn(name = "house_id")
+    )
+    private List<House> houses = new ArrayList<>();
+
     public Resident(Passport passport) {
         this.passport = passport;
     }

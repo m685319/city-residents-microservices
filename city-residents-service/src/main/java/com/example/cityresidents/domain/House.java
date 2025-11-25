@@ -1,4 +1,41 @@
 package com.example.cityresidents.domain;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(exclude = "owners")
+@Entity
 public class House {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Long id;
+
+    @Column(nullable = false)
+    private String address;
+
+    @ManyToMany(mappedBy = "houses", fetch = FetchType.LAZY)
+    private List<Resident> owners = new ArrayList<>();
+
+    public House(String address) {
+        this.address = address;
+    }
+
+    public void addOwner(Resident r) {
+        owners.add(r);
+        if (!r.getHouses().contains(this)) r.getHouses().add(this);
+    }
+
+    public void removeOwner(Resident r) {
+        owners.remove(r);
+        r.getHouses().remove(this);
+    }
 }
