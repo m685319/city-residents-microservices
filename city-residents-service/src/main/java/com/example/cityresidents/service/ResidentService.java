@@ -4,6 +4,7 @@ import com.example.cityresidents.domain.Passport;
 import com.example.cityresidents.domain.Resident;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
+import com.example.cityresidents.mapper.ResidentMapper;
 import com.example.cityresidents.repo.ResidentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,32 +15,40 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResidentService {
 
     private final ResidentRepository residentRepository;
+    private final ResidentMapper residentMapper;
 
     @Transactional
-    public Resident createResident(ResidentDto dto) {
+    public ResidentDto createResident(ResidentDto dto) {
         Passport p = new Passport("");
         Resident r = new Resident(p);
-        return residentRepository.save(r);
+        Resident saved = residentRepository.save(r);
+        return residentMapper.toDto(saved);
     }
 
-    public Resident getById(Long id) {
-        return residentRepository.findById(id)
+    public ResidentDto getById(Long id) {
+        Resident resident =  residentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Resident not found: " + id));
+        return residentMapper.toDto(resident);
     }
 
     @Transactional
-    public Resident updateResident(Long id, ResidentUpdateDto dto) {
-        Resident r = getById(id);
+    public ResidentDto updateResident(Long id, ResidentUpdateDto dto) {
+        Resident resident = residentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Resident not found: " + id));
+
         if (dto.getPassportNumber() != null) {
-            r.getPassport().setPassportNumber(dto.getPassportNumber());
+            resident.getPassport().setPassportNumber(dto.getPassportNumber());
         }
-        return residentRepository.save(r);
+
+        Resident updated = residentRepository.save(resident);
+        return residentMapper.toDto(updated);
     }
 
     @Transactional
     public void deleteResident(Long id) {
-        Resident r = getById(id);
-        r.getHouses().forEach(h -> h.getOwners().remove(r));
-        residentRepository.delete(r);
+        Resident resident = residentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Resident not found: " + id));
+
+        residentRepository.delete(resident);
     }
 }

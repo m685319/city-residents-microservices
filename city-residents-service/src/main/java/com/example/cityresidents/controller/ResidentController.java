@@ -7,6 +7,9 @@ import com.example.cityresidents.service.ResidentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/residents")
@@ -16,19 +19,21 @@ public class ResidentController {
     private final ResidentService residentService;
 
     @PostMapping
-    public ResponseEntity<Resident> create(@RequestBody ResidentDto dto) {
-        Resident created = residentService.createResident(dto);
-        return ResponseEntity.ok(created);
+    public ResponseEntity<ResidentDto> create(@RequestBody @Valid ResidentDto dto) {
+        ResidentDto created = residentService.createResident(dto);
+        URI location = URI.create("/residents/" + created.getId());
+        return ResponseEntity.created(location).body(created);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Resident> get(@PathVariable Long id) {
-        return ResponseEntity.ok(residentService.getById(id));
+    public ResponseEntity<ResidentDto> get(@PathVariable Long id) {
+        ResidentDto dto = residentService.getById(id);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Resident> update(@PathVariable Long id, @RequestBody ResidentUpdateDto dto) {
-        Resident updated = residentService.updateResident(id, dto);
+    public ResponseEntity<ResidentDto> update(@PathVariable Long id, @RequestBody @Valid ResidentUpdateDto dto) {
+        ResidentDto updated = residentService.updateResident(id, dto);
         return ResponseEntity.ok(updated);
     }
 
