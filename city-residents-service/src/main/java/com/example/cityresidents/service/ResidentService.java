@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ResidentService {
@@ -19,7 +21,7 @@ public class ResidentService {
 
     @Transactional
     public ResidentDto createResident(ResidentDto dto) {
-        Passport p = new Passport("");
+        Passport p = new Passport(UUID.randomUUID().toString());
         Resident r = new Resident(p);
         Resident saved = residentRepository.save(r);
         return residentMapper.toDto(saved);

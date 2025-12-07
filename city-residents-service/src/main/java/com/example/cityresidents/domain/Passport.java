@@ -16,7 +16,7 @@ public class Passport {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = false, unique = true, length = 100)
     private String passportNumber;
 
     public Passport(String passportNumber) {
