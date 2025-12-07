@@ -6,4 +6,5 @@ import lombok.Data;
 public class ResidentDto {
     private Long id;
     private Long passportId;
+    private String passportNumber;
 }

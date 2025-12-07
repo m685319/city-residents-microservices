@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 public interface ResidentMapper {
 
     @Mapping(source = "passport.id", target = "passportId")
+    @Mapping(source = "passport.passportNumber", target = "passportNumber")
     ResidentDto toDto(Resident resident);
 }
