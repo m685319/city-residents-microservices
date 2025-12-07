@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CarService {
@@ -29,5 +32,10 @@ public class CarService {
         carRepository.save(car);
 
         return carMapper.toDto(car);
+    }
+
+    public List<CarResponseDto> getCarsByOwner(Long ownerId) {
+        List<Car> cars = carRepository.findByOwnerId(ownerId);
+        return cars.stream().map(carMapper::toDto).collect(Collectors.toList());
     }
 }
