@@ -1,5 +1,6 @@
 package com.example.cityresidents.exception.handler;
 
+import com.example.cityresidents.exception.BusinessException;
 import com.example.cityresidents.exception.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleEntityNotFound(EntityNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("message", ex.getMessage()));
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Map<String, String>> handleBusiness(BusinessException ex) {
+        return ResponseEntity
+                .badRequest()
                 .body(Map.of("message", ex.getMessage()));
     }
 }
