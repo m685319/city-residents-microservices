@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = "owner")
 @Entity
@@ -29,9 +29,4 @@ public class Car {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Resident owner;
-
-    public Car(String plateNumber, String model) {
-        this.plateNumber = plateNumber;
-        this.model = model;
-    }
 }

@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Entity
@@ -18,8 +18,4 @@ public class Passport {
 
     @Column(nullable = false, unique = true, length = 100)
     private String passportNumber;
-
-    public Passport(String passportNumber) {
-        this.passportNumber = passportNumber;
-    }
 }

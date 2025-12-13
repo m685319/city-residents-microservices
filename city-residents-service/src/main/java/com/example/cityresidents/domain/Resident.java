@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = "passport")
 @Entity
@@ -36,10 +36,6 @@ public class Resident {
             inverseJoinColumns = @JoinColumn(name = "house_id")
     )
     private List<House> houses = new ArrayList<>();
-
-    public Resident(Passport passport) {
-        this.passport = passport;
-    }
 
     public void addCar(Car car) {
         cars.add(car);

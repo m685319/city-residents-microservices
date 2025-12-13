@@ -22,8 +22,7 @@ public class ResidentService {
 
     @Transactional
     public ResidentDto createResident(ResidentDto dto) {
-        Passport p = new Passport(UUID.randomUUID().toString());
-        Resident r = new Resident(p);
+        Resident r = residentMapper.toEntity(dto);
         Resident saved = residentRepository.save(r);
         return residentMapper.toDto(saved);
     }

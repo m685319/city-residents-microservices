@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(exclude = "owners")
 @Entity
@@ -24,10 +24,6 @@ public class House {
 
     @ManyToMany(mappedBy = "houses", fetch = FetchType.LAZY)
     private List<Resident> owners = new ArrayList<>();
-
-    public House(String address) {
-        this.address = address;
-    }
 
     public void addOwner(Resident r) {
         owners.add(r);
