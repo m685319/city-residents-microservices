@@ -1,6 +1,5 @@
 package com.example.cityresidents.controller;
 
-import com.example.cityresidents.domain.Resident;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
 import com.example.cityresidents.service.ResidentService;

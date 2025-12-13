@@ -4,6 +4,7 @@ import com.example.cityresidents.domain.Car;
 import com.example.cityresidents.domain.Resident;
 import com.example.cityresidents.dto.CarCreateDto;
 import com.example.cityresidents.dto.CarResponseDto;
+import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.mapper.CarMapper;
 import com.example.cityresidents.repo.CarRepository;
 import com.example.cityresidents.repo.ResidentRepository;
@@ -25,7 +26,7 @@ public class CarService {
     @Transactional
     public CarResponseDto createCar(Long ownerId, CarCreateDto dto) {
         Resident owner = residentRepository.findById(ownerId)
-                .orElseThrow(() -> new IllegalArgumentException("Owner not found: " + ownerId));
+                .orElseThrow(() -> new EntityNotFoundException("Owner not found: " + ownerId));
 
         Car car = carMapper.toEntity(dto);
         car.setOwner(owner);

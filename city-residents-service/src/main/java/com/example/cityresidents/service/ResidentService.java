@@ -4,6 +4,7 @@ import com.example.cityresidents.domain.Passport;
 import com.example.cityresidents.domain.Resident;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
+import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.mapper.ResidentMapper;
 import com.example.cityresidents.repo.ResidentRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class ResidentService {
 
     public ResidentDto getById(Long id) {
         Resident resident =  residentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Resident not found: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Resident not found: " + id));
         return residentMapper.toDto(resident);
     }
 
