@@ -29,6 +29,11 @@
             <version>${lombok.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
         <!-- dependency on shared library -->
         <dependency>
             <groupId>com.example</groupId>
