@@ -35,9 +35,15 @@ public class ResidentController {
     }
 
     @GetMapping("/owners")
-    public ResponseEntity<List<ResidentDto>> getOwnersByStreet(
-            @RequestParam String street) {
+    public ResponseEntity<List<ResidentDto>> getOwnersByStreet(@RequestParam String street) {
         return ResponseEntity.ok(residentService.getOwnersByStreet(street));
+    }
+
+    @GetMapping("/passports/male")
+    public ResponseEntity<List<String>> getMalePassports(@RequestParam String letter) {
+        return ResponseEntity.ok(
+                residentService.getMalePassportsByLastNamePrefix(letter)
+        );
     }
 
     @PutMapping("/{id}")

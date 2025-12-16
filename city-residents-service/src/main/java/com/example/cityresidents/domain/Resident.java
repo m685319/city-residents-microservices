@@ -23,6 +23,15 @@ public class Resident {
     @JoinColumn(name = "passport_id", nullable = false)
     private Passport passport;
 
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false)
+    private String gender;
+
     @OneToMany(mappedBy = "owner",
             cascade = CascadeType.ALL,
             orphanRemoval = true,

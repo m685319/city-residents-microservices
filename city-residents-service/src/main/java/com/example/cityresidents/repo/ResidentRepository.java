@@ -16,4 +16,18 @@ public interface ResidentRepository extends JpaRepository<Resident, Long> {
     WHERE h.address LIKE CONCAT(:street, '%')
 """)
     List<Resident> findOwnersByStreet(@Param("street") String street);
+
+    @Query(
+            value = """
+        SELECT p.passport_number
+        FROM resident r
+        JOIN passport p ON r.passport_id = p.id
+        WHERE r.gender = 'M'
+        AND r.last_name ILIKE CONCAT(:letter, '%')
+    """,
+            nativeQuery = true
+    )
+    List<String> findMalePassportNumbersByLastNamePrefix(
+            @Param("letter") String letter
+    );
 }

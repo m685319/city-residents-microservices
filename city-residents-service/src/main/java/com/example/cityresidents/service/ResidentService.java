@@ -41,6 +41,10 @@ public class ResidentService {
                 .toList();
     }
 
+    public List<String> getMalePassportsByLastNamePrefix(String letter) {
+        return residentRepository.findMalePassportNumbersByLastNamePrefix(letter);
+    }
+
     @Transactional
     public ResidentDto updateResident(Long id, ResidentUpdateDto dto) {
         Resident resident = residentRepository.findById(id)
