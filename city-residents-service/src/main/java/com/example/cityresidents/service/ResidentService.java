@@ -1,10 +1,10 @@
 package com.example.cityresidents.service;
 
-import com.example.cityresidents.domain.Passport;
 import com.example.cityresidents.domain.Resident;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
 import com.example.cityresidents.exception.EntityNotFoundException;
+import com.example.cityresidents.kafka.producer.ResidentEventProducer;
 import com.example.cityresidents.mapper.ResidentMapper;
 import com.example.cityresidents.repo.ResidentRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +19,16 @@ public class ResidentService {
 
     private final ResidentRepository residentRepository;
     private final ResidentMapper residentMapper;
+    private final ResidentEventProducer residentEventProducer;
 
     @Transactional
     public ResidentDto createResident(ResidentDto dto) {
         Resident r = residentMapper.toEntity(dto);
         Resident saved = residentRepository.save(r);
+        residentEventProducer.sendResidentCreated(
+                saved.getId(),
+                saved.getPassport().getPassportNumber()
+        );
         return residentMapper.toDto(saved);
     }
 
