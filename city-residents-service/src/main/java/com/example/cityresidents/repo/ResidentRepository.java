@@ -1,6 +1,6 @@
 package com.example.cityresidents.repo;
 
-import com.example.cityresidents.domain.Resident;
+import com.example.cityresidents.entity.Resident;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

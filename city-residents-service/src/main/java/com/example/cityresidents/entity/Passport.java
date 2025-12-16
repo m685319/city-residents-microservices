@@ -1,4 +1,4 @@
-package com.example.cityresidents.domain;
+package com.example.cityresidents.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,6 +16,6 @@ public class Passport {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, unique = true)
     private String passportNumber;
 }

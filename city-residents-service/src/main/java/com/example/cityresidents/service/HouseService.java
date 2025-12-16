@@ -1,6 +1,6 @@
 package com.example.cityresidents.service;
 
-import com.example.cityresidents.domain.House;
+import com.example.cityresidents.entity.House;
 import com.example.cityresidents.dto.HouseCreateDto;
 import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.mapper.HouseMapper;

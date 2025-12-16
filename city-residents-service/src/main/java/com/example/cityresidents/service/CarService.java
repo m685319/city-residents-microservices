@@ -1,7 +1,7 @@
 package com.example.cityresidents.service;
 
-import com.example.cityresidents.domain.Car;
-import com.example.cityresidents.domain.Resident;
+import com.example.cityresidents.entity.Car;
+import com.example.cityresidents.entity.Resident;
 import com.example.cityresidents.dto.CarCreateDto;
 import com.example.cityresidents.dto.CarResponseDto;
 import com.example.cityresidents.exception.EntityNotFoundException;

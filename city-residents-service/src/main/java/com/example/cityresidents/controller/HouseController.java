@@ -1,6 +1,6 @@
 package com.example.cityresidents.controller;
 
-import com.example.cityresidents.domain.House;
+import com.example.cityresidents.entity.House;
 import com.example.cityresidents.dto.HouseCreateDto;
 import com.example.cityresidents.service.HouseService;
 import lombok.RequiredArgsConstructor;

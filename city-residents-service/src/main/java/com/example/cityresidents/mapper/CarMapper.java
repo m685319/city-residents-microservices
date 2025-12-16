@@ -1,6 +1,6 @@
 package com.example.cityresidents.mapper;
 
-import com.example.cityresidents.domain.Car;
+import com.example.cityresidents.entity.Car;
 import com.example.cityresidents.dto.CarCreateDto;
 import com.example.cityresidents.dto.CarResponseDto;
 import org.mapstruct.Mapper;
