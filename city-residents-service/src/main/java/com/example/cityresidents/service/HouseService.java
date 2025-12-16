@@ -26,6 +26,8 @@ public class HouseService {
     public void delete(Long id) {
         House house = houseRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("House not found: " + id));
+        house.getOwners().forEach(owner -> owner.getHouses().remove(house));
+        house.getOwners().clear();
         houseRepository.delete(house);
     }
 }
