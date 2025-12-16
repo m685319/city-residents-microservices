@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,6 +32,13 @@ public class ResidentService {
         Resident resident =  residentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Resident not found: " + id));
         return residentMapper.toDto(resident);
+    }
+
+    public List<ResidentDto> getOwnersByStreet(String street) {
+        return residentRepository.findOwnersByStreet(street)
+                .stream()
+                .map(residentMapper::toDto)
+                .toList();
     }
 
     @Transactional

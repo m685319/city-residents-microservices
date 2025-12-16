@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 import java.net.URI;
+import java.util.List;
 
 @Validated
 @RestController
@@ -31,6 +32,12 @@ public class ResidentController {
     public ResponseEntity<ResidentDto> get(@PathVariable @Min(1) Long id) {
         ResidentDto dto = residentService.getById(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/owners")
+    public ResponseEntity<List<ResidentDto>> getOwnersByStreet(
+            @RequestParam String street) {
+        return ResponseEntity.ok(residentService.getOwnersByStreet(street));
     }
 
     @PutMapping("/{id}")
