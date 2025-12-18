@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ResidentMapper {
 
-    @Mapping(source = "passport.id", target = "passportId")
-    @Mapping(source = "passport.passportNumber", target = "passportNumber")
+    @Mapping(source = "passport", target = "passportDto")
     ResidentDto toDto(Resident resident);
 
+    @Mapping(source = "passportDto", target = "passport")
     Resident toEntity(ResidentDto dto);
 }

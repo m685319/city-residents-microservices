@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class ResidentDto {
     private Long id;
-    private Long passportId;
-    private String passportNumber;
+    private PassportDto passportDto;
+    private String firstName;
+    private String lastName;
+    private String gender;
 }
