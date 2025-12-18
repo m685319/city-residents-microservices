@@ -21,14 +21,13 @@ public class ResidentService {
     private final ResidentMapper residentMapper;
     private final ResidentEventProducer residentEventProducer;
 
-    //@Transactional
     public ResidentDto createResident(ResidentDto dto) {
         Resident r = residentMapper.toEntity(dto);
         Resident saved = residentRepository.save(r);
-        /*residentEventProducer.sendResidentCreated(
+        residentEventProducer.sendResidentCreated(
                 saved.getId(),
                 saved.getPassport().getPassportNumber()
-        );*/
+        );
         return residentMapper.toDto(saved);
     }
 
