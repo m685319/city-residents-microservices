@@ -1,5 +1,6 @@
 package com.example.cityresidents.entity;
 
+import com.example.cityresidents.entity.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,8 +30,9 @@ public class Resident {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 1)
+    private Gender gender;
 
     @OneToMany(mappedBy = "owner",
             cascade = CascadeType.ALL,
@@ -45,14 +47,4 @@ public class Resident {
             inverseJoinColumns = @JoinColumn(name = "house_id")
     )
     private List<House> houses = new ArrayList<>();
-
-    public void addCar(Car car) {
-        cars.add(car);
-        car.setOwner(this);
-    }
-
-    public void removeCar(Car car) {
-        cars.remove(car);
-        car.setOwner(null);
-    }
 }

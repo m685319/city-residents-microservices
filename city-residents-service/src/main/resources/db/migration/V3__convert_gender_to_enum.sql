@@ -1,0 +1,2 @@
+ALTER TABLE resident
+    ALTER COLUMN gender TYPE VARCHAR(1);
