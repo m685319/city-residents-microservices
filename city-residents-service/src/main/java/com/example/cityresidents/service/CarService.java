@@ -36,7 +36,8 @@ public class CarService {
     }
 
     public List<CarResponseDto> getCarsByOwner(Long ownerId) {
-        List<Car> cars = carRepository.findByOwnerId(ownerId);
-        return cars.stream().map(carMapper::toDto).collect(Collectors.toList());
+        return carRepository.findByOwnerId(ownerId).stream()
+                .map(carMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
