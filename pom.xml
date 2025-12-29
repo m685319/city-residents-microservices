@@ -40,6 +40,15 @@
 				<scope>import</scope>
 			</dependency>
 
+			<!-- Testcontainers BOM -->
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>testcontainers-bom</artifactId>
+				<version>1.19.7</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>com.example</groupId>
 				<artifactId>shared-library</artifactId>
