@@ -3,6 +3,10 @@ package com.example.cityresidents.controller;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
 import com.example.cityresidents.service.ResidentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +17,7 @@ import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Tag(name = "Residents", description = "Resident management API")
 @Validated
 @RestController
 @RequestMapping("/residents")
@@ -21,6 +26,14 @@ public class ResidentController {
 
     private final ResidentService residentService;
 
+    @Operation(
+            summary = "Create resident",
+            description = "Creates a new resident with passport"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Resident created"),
+            @ApiResponse(responseCode = "422", description = "Validation error")
+    })
     @PostMapping
     public ResponseEntity<ResidentDto> create(@RequestBody @Valid ResidentDto dto) {
         ResidentDto created = residentService.createResident(dto);
