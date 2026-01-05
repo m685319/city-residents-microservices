@@ -24,10 +24,7 @@ public class ResidentService {
     public ResidentDto createResident(ResidentDto dto) {
         Resident r = residentMapper.toEntity(dto);
         Resident saved = residentRepository.save(r);
-        residentEventProducer.sendResidentCreated(
-                saved.getId(),
-                saved.getPassport().getPassportNumber()
-        );
+        residentEventProducer.sendResidentCreated(saved);
         return residentMapper.toDto(saved);
     }
 

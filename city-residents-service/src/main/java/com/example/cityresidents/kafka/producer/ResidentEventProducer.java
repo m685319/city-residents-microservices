@@ -1,6 +1,7 @@
 package com.example.cityresidents.kafka.producer;
 
-import com.example.cityresidents.kafka.event.ResidentCreatedEvent;
+import com.example.cityresidents.entity.Resident;
+import com.example.shared.event.ResidentCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,15 @@ public class ResidentEventProducer {
 
     private final KafkaTemplate<String, ResidentCreatedEvent> kafkaTemplate;
 
-    public void sendResidentCreated(Long residentId, String passportNumber) {
-        ResidentCreatedEvent event =
-                new ResidentCreatedEvent(residentId, passportNumber);
+    public void sendResidentCreated(Resident resident) {
 
-        kafkaTemplate.send(TOPIC, residentId.toString(), event);
+        ResidentCreatedEvent event =
+                new ResidentCreatedEvent(
+                        resident.getId(),
+                        resident.getPassport().getPassportNumber(),
+                        resident.getGender()
+                );
+
+        kafkaTemplate.send(TOPIC, resident.getId().toString(), event);
     }
 }
