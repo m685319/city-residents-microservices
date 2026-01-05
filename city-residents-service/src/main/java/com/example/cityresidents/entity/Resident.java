@@ -1,6 +1,6 @@
 package com.example.cityresidents.entity;
 
-import com.example.cityresidents.entity.enums.Gender;
+import com.example.shared.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
