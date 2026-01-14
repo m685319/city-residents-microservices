@@ -12,5 +12,11 @@ spring:
       properties:
         spring.json.trusted.packages: com.example.shared.event
         spring.json.value.default.type: com.example.shared.event.ResidentCreatedEvent
+
+app:
+  kafka:
+    topics:
+      resident-events: resident-events
+
 server:
   port: 8082

@@ -1,5 +1,6 @@
 package com.example.cityresidents.kafka.producer;
 
+import com.example.cityresidents.config.KafkaTopicsProperties;
 import com.example.cityresidents.entity.Resident;
 import com.example.shared.event.ResidentCreatedEvent;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +11,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ResidentEventProducer {
 
-    private static final String TOPIC = "resident-events";
-
     private final KafkaTemplate<String, ResidentCreatedEvent> kafkaTemplate;
+    private final KafkaTopicsProperties topicsProperties;
 
     public void sendResidentCreated(Resident resident) {
 
@@ -23,6 +23,10 @@ public class ResidentEventProducer {
                         resident.getGender()
                 );
 
-        kafkaTemplate.send(TOPIC, resident.getId().toString(), event);
+        kafkaTemplate.send(
+                topicsProperties.getResidentEvents(),
+                resident.getId().toString(),
+                event
+        );
     }
 }

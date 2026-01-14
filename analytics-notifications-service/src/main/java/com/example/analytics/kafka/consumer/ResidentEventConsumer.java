@@ -9,9 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResidentEventConsumer {
     @KafkaListener(
-            topics = "resident-events",
-            groupId = "analytics-service",
-            containerFactory = "kafkaListenerContainerFactory"
+            topics = "${app.kafka.topics.resident-events}",
+            groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consume(ResidentCreatedEvent event) {
         log.info(
