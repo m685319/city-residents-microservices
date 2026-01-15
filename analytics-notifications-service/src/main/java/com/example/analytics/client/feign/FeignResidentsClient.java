@@ -16,6 +16,6 @@ import java.util.List;
 public interface FeignResidentsClient extends ResidentsClient {
 
     @Override
-    @GetMapping("/residents")
+    @GetMapping("/residents/notifications")
     List<ResidentNotificationDto> getAllResidents();
 }

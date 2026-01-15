@@ -25,7 +25,7 @@ public class RestResidentsClient implements ResidentsClient {
     public List<ResidentNotificationDto> getAllResidents() {
         return restClient
                 .get()
-                .uri("/residents")
+                .uri("/residents/notifications")
                 .retrieve()
                 .body(new org.springframework.core.ParameterizedTypeReference<>() {});
     }

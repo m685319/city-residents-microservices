@@ -1,8 +1,9 @@
 package com.example.cityresidents.service;
 
-import com.example.cityresidents.entity.Resident;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
+import com.example.cityresidents.dto.notification.ResidentNotificationView;
+import com.example.cityresidents.entity.Resident;
 import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.kafka.producer.ResidentEventProducer;
 import com.example.cityresidents.mapper.ResidentMapper;
@@ -34,6 +35,12 @@ public class ResidentServiceImpl implements ResidentService {
         Resident resident =  residentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Resident not found: " + id));
         return residentMapper.toDto(resident);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ResidentNotificationView> getResidentsForNotifications() {
+        return residentRepository.findAllForNotifications();
     }
 
     @Override

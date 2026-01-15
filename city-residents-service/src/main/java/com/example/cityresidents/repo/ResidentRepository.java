@@ -1,5 +1,6 @@
 package com.example.cityresidents.repo;
 
+import com.example.cityresidents.dto.notification.ResidentNotificationView;
 import com.example.cityresidents.entity.Resident;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,4 +31,15 @@ public interface ResidentRepository extends JpaRepository<Resident, Long> {
     List<String> findMalePassportNumbersByLastNamePrefix(
             @Param("letter") String letter
     );
+
+    @Query("""
+    select new com.example.cityresidents.dto.notification.ResidentNotificationView(
+        r.firstName,
+        r.lastName,
+        p.passportNumber
+    )
+    from Resident r
+    join r.passport p
+""")
+    List<ResidentNotificationView> findAllForNotifications();
 }
