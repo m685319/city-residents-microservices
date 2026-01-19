@@ -2,7 +2,7 @@ package com.example.cityresidents.service;
 
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
-import com.example.cityresidents.dto.notification.ResidentNotificationView;
+import com.example.shared.dto.ResidentNotificationDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface ResidentService {
 
     ResidentDto getById(Long id);
 
-    List<ResidentNotificationView> getResidentsForNotifications();
+    List<ResidentNotificationDto> getResidentsForNotifications();
 
     List<ResidentDto> getOwnersByStreet(String street);
 

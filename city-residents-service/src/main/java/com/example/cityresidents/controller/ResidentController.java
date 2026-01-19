@@ -2,8 +2,9 @@ package com.example.cityresidents.controller;
 
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
-import com.example.cityresidents.dto.notification.ResidentNotificationView;
 import com.example.cityresidents.service.ResidentService;
+import com.example.shared.api.ResidentsApi;
+import com.example.shared.dto.ResidentNotificationDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -31,7 +32,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/residents")
 @RequiredArgsConstructor
-public class ResidentController {
+public class ResidentController implements ResidentsApi {
 
     private final ResidentService residentService;
 
@@ -51,8 +52,8 @@ public class ResidentController {
     }
 
     @GetMapping("/notifications")
-    public ResponseEntity<List<ResidentNotificationView>> getForNotifications() {
-        return ResponseEntity.ok(residentService.getResidentsForNotifications());
+    public List<ResidentNotificationDto> getResidentsForNotifications() {
+        return residentService.getResidentsForNotifications();
     }
 
     @GetMapping("/{id}")

@@ -5,15 +5,17 @@ import com.example.cityresidents.dto.PassportDto;
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
 import com.example.cityresidents.exception.EntityNotFoundException;
+import com.example.cityresidents.mapper.ResidentNotificationMapper;
 import com.example.cityresidents.service.ResidentService;
+import com.example.shared.enums.Gender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -23,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ResidentController.class)
+@Import(ResidentNotificationMapper.class)
 class ResidentControllerTest {
 
     @Autowired
@@ -31,6 +34,9 @@ class ResidentControllerTest {
     @MockitoBean
     private ResidentService residentService;
 
+    @MockitoBean
+    private ResidentNotificationMapper notificationMapper;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
@@ -38,13 +44,13 @@ class ResidentControllerTest {
         ResidentDto input = new ResidentDto();
         input.setFirstName("Ivan");
         input.setLastName("Ivanov");
-        input.setGender("M");
+        input.setGender(Gender.M);
 
         ResidentDto created = new ResidentDto();
         created.setId(1L);
         created.setFirstName("Ivan");
         created.setLastName("Ivanov");
-        created.setGender("M");
+        created.setGender(Gender.M);
 
         when(residentService.createResident(any()))
                 .thenReturn(created);

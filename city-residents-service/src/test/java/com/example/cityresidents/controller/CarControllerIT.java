@@ -3,8 +3,8 @@ package com.example.cityresidents.controller;
 import com.example.cityresidents.dto.CarCreateDto;
 import com.example.cityresidents.entity.Passport;
 import com.example.cityresidents.entity.Resident;
-import com.example.cityresidents.entity.enums.Gender;
 import com.example.cityresidents.repo.ResidentRepository;
+import com.example.shared.enums.Gender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc

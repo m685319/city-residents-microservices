@@ -2,12 +2,13 @@ package com.example.cityresidents.service;
 
 import com.example.cityresidents.dto.ResidentDto;
 import com.example.cityresidents.dto.ResidentUpdateDto;
-import com.example.cityresidents.dto.notification.ResidentNotificationView;
 import com.example.cityresidents.entity.Resident;
 import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.kafka.producer.ResidentEventProducer;
 import com.example.cityresidents.mapper.ResidentMapper;
+import com.example.cityresidents.mapper.ResidentNotificationMapper;
 import com.example.cityresidents.repo.ResidentRepository;
+import com.example.shared.dto.ResidentNotificationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class ResidentServiceImpl implements ResidentService {
     private final ResidentRepository residentRepository;
     private final ResidentMapper residentMapper;
     private final ResidentEventProducer residentEventProducer;
+    private final ResidentNotificationMapper notificationMapper;
 
     @Override
     public ResidentDto createResident(ResidentDto dto) {
@@ -39,8 +41,10 @@ public class ResidentServiceImpl implements ResidentService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ResidentNotificationView> getResidentsForNotifications() {
-        return residentRepository.findAllForNotifications();
+    public List<ResidentNotificationDto> getResidentsForNotifications() {
+        return residentRepository.findAllForNotifications().stream()
+                .map(notificationMapper::toDto)
+                .toList();
     }
 
     @Override
