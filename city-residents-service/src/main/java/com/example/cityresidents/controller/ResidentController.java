@@ -51,7 +51,7 @@ public class ResidentController implements ResidentsApi {
         return ResponseEntity.created(location).body(created);
     }
 
-    @GetMapping("/notifications")
+    @Override
     public List<ResidentNotificationDto> getResidentsForNotifications() {
         return residentService.getResidentsForNotifications();
     }
