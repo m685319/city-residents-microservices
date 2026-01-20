@@ -19,16 +19,23 @@ public class ResidentsNotificationScheduler {
     @Scheduled(cron = "*/30 * * * * *")
     public void sendNotifications() {
 
-        List<ResidentNotificationDto> residents =
-                residentsClient.getAllResidents();
+        try {
+            List<ResidentNotificationDto> residents =
+                    residentsClient.getAllResidents();
 
-        residents.forEach(r ->
-                log.info(
-                        "[NOTIFICATION] Resident {} {} with passport {}",
-                        r.getFirstName(),
-                        r.getLastName(),
-                        r.getPassportNumber()
-                )
-        );
+            residents.forEach(r ->
+                    log.info(
+                            "[NOTIFICATION] Resident {} {} with passport {}",
+                            r.getFirstName(),
+                            r.getLastName(),
+                            r.getPassportNumber()
+                    )
+            );
+        } catch (Exception e) {
+            log.warn(
+                    "Residents service is unavailable, notifications skipped: {}",
+                    e.getMessage()
+            );
+        }
     }
 }
