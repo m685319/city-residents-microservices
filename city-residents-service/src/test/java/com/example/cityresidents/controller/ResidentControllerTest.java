@@ -1,12 +1,12 @@
 package com.example.cityresidents.controller;
 
 
-import com.example.cityresidents.dto.PassportDto;
-import com.example.cityresidents.dto.ResidentDto;
-import com.example.cityresidents.dto.ResidentUpdateDto;
 import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.mapper.ResidentNotificationMapper;
 import com.example.cityresidents.service.ResidentService;
+import com.example.shared.dto.PassportDto;
+import com.example.shared.dto.ResidentDto;
+import com.example.shared.dto.ResidentUpdateDto;
 import com.example.shared.enums.Gender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

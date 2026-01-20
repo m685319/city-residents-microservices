@@ -1,7 +1,7 @@
 package com.example.cityresidents.mapper;
 
 import com.example.cityresidents.entity.Resident;
-import com.example.cityresidents.dto.ResidentDto;
+import com.example.shared.dto.ResidentDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

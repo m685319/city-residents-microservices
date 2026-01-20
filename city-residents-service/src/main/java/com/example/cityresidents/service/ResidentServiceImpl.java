@@ -1,14 +1,14 @@
 package com.example.cityresidents.service;
 
-import com.example.cityresidents.dto.ResidentDto;
-import com.example.cityresidents.dto.ResidentUpdateDto;
 import com.example.cityresidents.entity.Resident;
 import com.example.cityresidents.exception.EntityNotFoundException;
 import com.example.cityresidents.kafka.producer.ResidentEventProducer;
 import com.example.cityresidents.mapper.ResidentMapper;
 import com.example.cityresidents.mapper.ResidentNotificationMapper;
 import com.example.cityresidents.repo.ResidentRepository;
+import com.example.shared.dto.ResidentDto;
 import com.example.shared.dto.ResidentNotificationDto;
+import com.example.shared.dto.ResidentUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package com.example.cityresidents.dto;
+package com.example.shared.dto;
 
 import lombok.Data;
 

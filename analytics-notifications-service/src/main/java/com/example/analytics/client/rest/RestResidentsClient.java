@@ -4,6 +4,7 @@ import com.example.analytics.client.ResidentsClient;
 import com.example.analytics.client.ResidentsClientProperties;
 import com.example.analytics.dto.ResidentNotificationDto;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -27,6 +28,6 @@ public class RestResidentsClient implements ResidentsClient {
                 .get()
                 .uri("/residents/notifications")
                 .retrieve()
-                .body(new org.springframework.core.ParameterizedTypeReference<>() {});
+                .body(new ParameterizedTypeReference<List<ResidentNotificationDto>>() {});
     }
 }
